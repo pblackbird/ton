@@ -270,7 +270,7 @@ set(TONLIB_COMPILE "0")
 
 include(AddCXXCompilerFlag)
 if (MSVC)
-  add_cxx_compiler_flag("/experimental:external /external:anglebrackets /external:W0")
+  add_cxx_compiler_flag("/experimental:external /external:anglebrackets /external:W0 /bigobj")
 endif()
 if (NOT MSVC)
   add_cxx_compiler_flag("-Wall")

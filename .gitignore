@@ -11,3 +11,5 @@ crypto/smartcont/auto/
 test/regression-tests.cache/
 *.swp
 **/*build*/
+tl/generate/generate_common.exe
+.vs

@@ -113,6 +113,8 @@ T min(T a, T b) {
   return a < b ? a : b;
 }
 
+using size_t = std::size_t;
+
 using string = std::string;
 
 template <class ValueT>
