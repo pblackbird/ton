@@ -25,6 +25,7 @@
 namespace td {
 
 class Slice;
+class CSlice;
 
 class MutableSlice {
   char *s_;
@@ -37,6 +38,8 @@ class MutableSlice {
   MutableSlice(char *s, size_t len);
   MutableSlice(unsigned char *s, size_t len);
   MutableSlice(string &s);
+  MutableSlice(CSlice &other_slice);
+
   template <class T>
   explicit MutableSlice(T s, std::enable_if_t<std::is_same<char *, T>::value, private_tag> = {});
   MutableSlice(char *s, char *t);
@@ -50,6 +53,7 @@ class MutableSlice {
   MutableSlice &remove_prefix(size_t prefix_len);
   MutableSlice &remove_suffix(size_t suffix_len);
   MutableSlice &truncate(size_t size);
+  MutableSlice &replace_with(char old_char, char new_char);
 
   MutableSlice copy() const;
 
@@ -60,8 +64,10 @@ class MutableSlice {
   unsigned char *uend() const;
 
   string str() const;
+  
   MutableSlice substr(size_t from) const;
   MutableSlice substr(size_t from, size_t size) const;
+
   size_t find(char c) const;
   size_t rfind(char c) const;
   void fill(char c);

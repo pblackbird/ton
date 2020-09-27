@@ -29,6 +29,9 @@ namespace td {
 inline MutableSlice::MutableSlice() : s_(const_cast<char *>("")), len_(0) {
 }
 
+inline MutableSlice::MutableSlice(CSlice &other_slice) : len_(other_slice.size()), s_(const_cast<char *>(other_slice.copy().data())) {
+}
+
 inline MutableSlice::MutableSlice(char *s, size_t len) : s_(s), len_(len) {
   CHECK(s_ != nullptr);
 }
@@ -72,6 +75,16 @@ inline MutableSlice &MutableSlice::truncate(size_t size) {
   if (len_ > size) {
     len_ = size;
   }
+  return *this;
+}
+
+inline MutableSlice &MutableSlice::replace_with(char old_char, char new_char) {
+  size_t cur_pos = rfind(old_char);
+  while (cur_pos != npos) {
+    s_[cur_pos] = new_char;
+    cur_pos = rfind(old_char);
+  }
+
   return *this;
 }
 

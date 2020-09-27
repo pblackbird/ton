@@ -117,8 +117,11 @@ void LiteQuery::start_up() {
     return;
   }
 
+  auto tl_object_ptr = F.move_as_ok();
+  LOG(INFO) << tl_object_ptr->get_id();
+
   lite_api::downcast_call(
-      *F.move_as_ok().get(),
+      *tl_object_ptr.get(),
       td::overloaded(
           [&](lite_api::liteServer_getTime& q) { this->perform_getTime(); },
           [&](lite_api::liteServer_getVersion& q) { this->perform_getVersion(); },

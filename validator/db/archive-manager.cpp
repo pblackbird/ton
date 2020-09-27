@@ -865,13 +865,17 @@ void ArchiveManager::start_up() {
     finalized_up_to_ = R.move_as_ok();
   }
 
-  td::WalkPath::run(db_root_ + "/archive/states/", [&](td::CSlice fname, td::WalkPath::Type t) -> void {
+  td::WalkPath::run(db_root_ + "/archive/states/", [&](td::CSlice cfname, td::WalkPath::Type t) -> void {
+    td::MutableSlice fname(cfname);
+    td::fix_path_slashes(fname);
+
     if (t == td::WalkPath::Type::NotDir) {
       LOG(ERROR) << "checking file " << fname;
       auto pos = fname.rfind('/');
       if (pos != td::Slice::npos) {
         fname.remove_prefix(pos + 1);
       }
+
       auto R = FileReferenceShort::create(fname.str());
       if (R.is_error()) {
         auto R2 = FileReference::create(fname.str());

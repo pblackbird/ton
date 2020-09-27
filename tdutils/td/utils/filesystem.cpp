@@ -78,6 +78,12 @@ Result<T> read_file_impl(CSlice path, int64 size, int64 offset) {
 
 }  // namespace
 
+void fix_path_slashes(MutableSlice& filename) {
+#ifdef _MSC_VER
+  filename.replace_with('\\', '/');
+#endif
+}
+
 Result<BufferSlice> read_file(CSlice path, int64 size, int64 offset) {
   return read_file_impl<BufferSlice>(path, size, offset);
 }

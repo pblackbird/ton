@@ -30,6 +30,8 @@ Result<BufferSlice> read_file(CSlice path, int64 size = -1, int64 offset = 0);
 Result<string> read_file_str(CSlice path, int64 size = -1, int64 offset = 0);
 Result<SecureString> read_file_secure(CSlice path, int64 size = -1, int64 offset = 0);
 
+void fix_path_slashes(MutableSlice& filename);
+
 Status copy_file(CSlice from, CSlice to, int64 size = -1) TD_WARN_UNUSED_RESULT;
 
 struct WriteFileOptions {
