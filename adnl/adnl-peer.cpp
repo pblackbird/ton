@@ -522,6 +522,9 @@ void AdnlPeerPairImpl::process_message(const adnlmessage::AdnlMessageReinit &mes
 void AdnlPeerPairImpl::process_message(const adnlmessage::AdnlMessageQuery &message) {
   auto P = td::PromiseCreator::lambda([SelfId = actor_id(this), query_id = message.query_id(),
                                        flags = static_cast<td::uint32>(0)](td::Result<td::BufferSlice> R) {
+
+    LOG(WARNING) << "got message ID " << query_id;
+
     if (R.is_error()) {
       LOG(WARNING) << "failed to answer query: " << R.move_as_error();
     } else {

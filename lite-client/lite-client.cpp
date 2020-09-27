@@ -335,6 +335,7 @@ bool TestNode::get_server_version(int mode) {
 void TestNode::got_server_version(td::Result<td::BufferSlice> res, int mode) {
   server_ok_ = false;
   if (res.is_error()) {
+    LOG(ERROR) << res.error().message().str();
     LOG(ERROR) << "cannot get server version and time (server too old?)";
   } else {
     auto F = ton::fetch_tl_object<ton::lite_api::liteServer_version>(res.move_as_ok(), true);

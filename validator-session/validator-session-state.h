@@ -141,7 +141,7 @@ class SentBlock : public ValidatorSessionDescription::RootObject {
     auto r = desc.get_by_hash(hash, temp);
     if (compare(r, src_idx, root_hash, file_hash, collated_data_file_hash, hash)) {
       desc.on_reuse();
-      return static_cast<const SentBlock*>(r);
+      return reinterpret_cast<const SentBlock*>(r);
     }
     return static_cast<const SentBlock*>(nullptr);
   }

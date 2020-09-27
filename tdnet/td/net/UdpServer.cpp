@@ -53,7 +53,7 @@ class UdpServerImpl : public UdpServer {
 };
 
 void UdpServerImpl::send(td::UdpMessage &&message) {
-  //LOG(WARNING) << "TO: " << message.address;
+  //LOG(WARNING) << message.data.size() << " bytes TO: " << message.address;
   fd_.send(std::move(message));
   loop();  // TODO: some yield logic
 }

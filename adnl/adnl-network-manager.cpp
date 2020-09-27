@@ -63,6 +63,8 @@ size_t AdnlNetworkManagerImpl::add_listening_udp_port(td::uint16 port) {
     td::actor::ActorShared<AdnlNetworkManagerImpl> manager_;
     size_t idx_;
     void on_udp_message(td::UdpMessage udp_message) override {
+      auto addr = udp_message.address;
+    //  VLOG(ADNL_WARNING) << "Got some stuff from " << addr.get_ip_str().str() << ":" << addr.get_port() << "\n";
       td::actor::send_closure_later(manager_, &AdnlNetworkManagerImpl::receive_udp_message, std::move(udp_message),
                                     idx_);
     }

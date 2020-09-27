@@ -267,7 +267,7 @@ int main(int argc, char* argv[]) {
   });
   p.add_option('p', "pub", "server public key", [&](td::Slice arg) {
     td::actor::send_closure(x, &ValidatorEngineConsole::set_public_key, td::BufferSlice{arg});
-  });
+  });   
   p.add_option('r', "disable-readline", "disable readline",
                [&]() { td::actor::send_closure(x, &ValidatorEngineConsole::set_readline_enabled, false); });
   p.add_option('R', "enable-readline", "enable readline",

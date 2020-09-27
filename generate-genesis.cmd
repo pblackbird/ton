@@ -1,0 +1,1 @@
+C:\Sources\ton\out\build\x64-Debug\crypto\Debug\create-state.exe -IC:\Sources\ton\crypto\smartcont C:\Sources\ton\crypto\smartcont\gen-zerostate.fif
